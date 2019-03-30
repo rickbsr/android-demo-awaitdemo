@@ -24,20 +24,20 @@ public class TagActivity extends AppCompatActivity {
 
         findViews();
 
-        this.view = new View(this) {
+view = new View(this) {
+    @Override
+    public void setTag(final Object tag) {
+        System.out.println(tag);
+        runOnUiThread(new Runnable() {
             @Override
-            public void setTag(final Object tag) {
-                System.out.println(tag);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textView.setText("演算結果：" + tag.toString());
-                        btn.setEnabled(true);
-                        bar.setVisibility(View.GONE);
-                    }
-                });
+            public void run() {
+                textView.setText("演算結果：" + tag.toString());
+                btn.setEnabled(true);
+                bar.setVisibility(View.GONE);
             }
-        };
+        });
+    }
+};
     }
 
     private void findViews() {
@@ -54,17 +54,17 @@ public class TagActivity extends AppCompatActivity {
         doThings(); // 執行某些耗時工作
     }
 
-    private void doThings() {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5 * 1000); // 模擬演算
-                    view.setTag(new Random().nextInt(10)); // 將結果放入 Tag 中
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+private void doThings() {
+    new Thread() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(5 * 1000); // 模擬演算
+                view.setTag(new Random().nextInt(10)); // 將結果放入 Tag 中
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }.start();
-    }
+        }
+    }.start();
+}
 }

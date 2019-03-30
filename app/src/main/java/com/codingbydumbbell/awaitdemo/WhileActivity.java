@@ -1,7 +1,7 @@
 package com.codingbydumbbell.awaitdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -38,26 +38,19 @@ public class WhileActivity extends AppCompatActivity {
         bar.setVisibility(View.VISIBLE);
         doThings(); // 執行某些耗時工作
 
-//        while (true) {
-//            System.out.println("aaa");
-////            try {
-////                Thread.sleep(1 * 1000);
-////            } catch (InterruptedException e) {
-////                e.printStackTrace();
-////            }
-//            if (i != -1) {
-//                textView.setText("演算結果：" + i);
-//                btn.setEnabled(true);
-//                bar.setVisibility(View.GONE);
-//                break;
-//            }
-//        }
-
-        while (i != -1) {
-            textView.setText("演算結果：" + i);
-            btn.setEnabled(true);
-            bar.setVisibility(View.GONE);
-            break;
+        while (true) {
+            try {
+                Thread.sleep(1 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (i != -1) {
+                textView.setText("演算結果：" + i);
+                btn.setEnabled(true);
+                bar.setVisibility(View.GONE);
+                i = -1;
+                break;
+            }
         }
     }
 
